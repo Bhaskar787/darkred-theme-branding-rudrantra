@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* ── User Brand Palette (#650a06 & #faf7f2) ─────────────────── */
+  --color-brand-red:       #650a06;   /* Deep Crimson Maroon / Brand Logo Color */
+  --color-brand-red-dark:  #420503;   /* Extra Deep Crimson */
+  --color-brand-red-mid:   #540805;   /* Rich Maroon */
+  --color-brand-red-light: #7f100a;   /* Soft Crimson Accent */
+
+  --color-brand-cream:       #faf7f2;   /* Main Light Alabaster Cream Background */
+  --color-brand-cream-light: #ffffff;   /* Warm Off-White Card */
+  --color-brand-cream-dark:  #efe1d5;   /* Header & Footer Distinct Background */
+  --color-brand-cream-border:#e2d4c7;   /* Warm Border */
+
+  /* ── Remap legacy color aliases to brand theme (#650a06 & #faf7f2) ── */
+  --color-navy:        #650a06;
+  --color-navy-deep:   #420503;
+  --color-navy-mid:    #540805;
+  --color-navy-light:  #7f100a;
+
+  --color-orange:        #650a06;
+  --color-orange-bright: #8a130c;
+  --color-orange-soft:   #a3241b;
+
+  --color-peach:         #faf7f2;
+  --color-peach-light:   #ffffff;
+  --color-peach-soft:    #efe1d5;
+  --color-crimson:       #650a06;
+
+  --color-forest:       #650a06;
+  --color-forest-deep:  #420503;
+  --color-forest-mid:   #540805;
+  --color-forest-light: #7f100a;
+
+  --color-gold:         #650a06;
+  --color-gold-bright:  #8a130c;
+  --color-gold-soft:    #a3241b;
+
+  --color-cream:        #faf7f2;
+  --color-cream-soft:   #ffffff;
+
+  --color-warm:         #faf7f2;
+  --color-warm-deep:    #efe1d5;
+
+  --color-background:   #faf7f2;
+  --color-foreground:   #650a06;
+  --color-border:       #e2d4c7;
+
+  /* ── Typography (Bai Jamjuree) ──────────────────────────────── */
+  --font-display: 'Bai Jamjuree', sans-serif;
+  --font-heading: 'Bai Jamjuree', sans-serif;
+  --font-body:    'Bai Jamjuree', sans-serif;
+  --font-sans:    'Bai Jamjuree', sans-serif;
+  --font-serif:   'Bai Jamjuree', sans-serif;
+
+  /* ── Animations ─────────────────────────────────────────────── */
+  --animate-golden-shimmer: golden-shimmer 3s infinite linear;
+  --animate-star-twinkle:   star-twinkle 4s infinite ease-in-out;
+  --animate-float-lotus:    float-lotus 6s infinite ease-in-out;
+  --animate-sacred-glow:    sacred-glow 2s infinite alternate;
+  --animate-marquee:        marquee 10s linear infinite;
+}
+
+/* ── Shadcn CSS variable surface (light) ─────────────────────────── */
+:root {
+  --font-display: 'Bai Jamjuree', sans-serif;
+  --font-heading: 'Bai Jamjuree', sans-serif;
+  --font-body:    'Bai Jamjuree', sans-serif;
+
+  /* HSL representation of #f7e5d9: 24 63% 91% */
+  --background: 24 63% 91%;
+  /* HSL representation of #650a06: 3 89% 21% */
+  --foreground: 3 89% 21%;
+
+  --card:            0 0% 100%;
+  --card-foreground: 3 89% 21%;
+  --card-border:     24 40% 80%;
+
+  --popover:            24 63% 96%;
+  --popover-foreground: 3 89% 21%;
+  --popover-border:     24 40% 80%;
+
+  --primary:            3 89% 21%;
+  --primary-foreground: 24 63% 91%;
+
+  --secondary:            24 50% 85%;
+  --secondary-foreground: 3 89% 21%;
+
+  --muted:            24 30% 86%;
+  --muted-foreground: 3 40% 32%;
+
+  --accent:            3 89% 21%;
+  --accent-foreground: 24 63% 91%;
+
+  --destructive:            0 68% 32%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 24 30% 78%;
+  --input:  24 30% 82%;
+  --ring:   3 89% 21%;
+
+  --sidebar:                24 63% 91%;
+  --sidebar-foreground:     3 89% 21%;
+  --sidebar-border:         24 40% 80%;
+  --sidebar-primary:        3 89% 21%;
+  --sidebar-primary-foreground: 24 63% 91%;
+  --sidebar-accent:         3 89% 21%;
+  --sidebar-accent-foreground: 24 63% 91%;
+  --sidebar-ring:           3 89% 21%;
+
+  --radius: 0.5rem;
+
+  --app-font-sans:  'Bai Jamjuree', sans-serif;
+  --app-font-serif: 'Bai Jamjuree', sans-serif;
+  --app-font-mono:  Menlo, monospace;
+}
+
+/* ── Keyframes ─────────────────────────────────────────────────── */
+@keyframes golden-shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes star-twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50%       { opacity: 1;   transform: scale(1.2); }
+}
+@keyframes float-lotus {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+@keyframes sacred-glow {
+  0%   { box-shadow: 0 0 10px rgba(101, 10, 6, 0.25); }
+  100% { box-shadow: 0 0 28px rgba(101, 10, 6, 0.65); }
+}
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── Base layer ─────────────────────────────────────────────────── */
+@layer base {
+  * { @apply border-border; }
+
+  body {
+    font-family: 'Bai Jamjuree', sans-serif;
+    background-color: #f7e5d9;
+    color: #650a06;
+    overflow-x: clip;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Bai Jamjuree', sans-serif;
+    color: #650a06;
+  }
+}
+
+
+
+/* ── Utilities ─────────────────────────────────────────────────── */
+@layer utilities {
+  input[type='search']::-webkit-search-cancel-button { @apply hidden; }
+  [contenteditable][data-placeholder]:empty::before {
+    content: attr(data-placeholder);
+    color: hsl(var(--muted-foreground));
+    pointer-events: none;
+  }
+
+  .bg-mandala {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="%23FC9269" stroke-width="0.5" stroke-opacity="0.2"><circle cx="50" cy="50" r="40"/><circle cx="50" cy="50" r="30"/><circle cx="50" cy="50" r="20"/><path d="M50 10 L50 90 M10 50 L90 50 M21.7 21.7 L78.3 78.3 M21.7 78.3 L78.3 21.7"/></svg>');
+    background-size: 600px 600px;
+    background-position: center;
+    background-repeat: repeat;
+  }
+
+  .bg-stars {
+    background-image: radial-gradient(circle, hsl(17.14deg 96.08% 70% / 0.6) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: center;
+  }
+
+  .text-gold-gradient {
+    background: linear-gradient(to right,
+      hsl(17.14deg 96.08% 70%),
+      hsl(22deg 97% 80%),
+      hsl(17.14deg 96.08% 70%)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+  }
+
+  .border-gold-gradient {
+    border-image: linear-gradient(to right,
+      transparent,
+      hsl(17.14deg 96.08% 70%),
+      transparent
+    ) 1;
+  }
+
+  .shadow-sacred-glow {
+    box-shadow: 0 0 20px hsl(17.14deg 96.08% 70% / 0.4);
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar { display: none; }
+
+  /* Elevate system (for shadcn compat) */
+  .toggle-elevate::before, .toggle-elevate-2::before {
+    content: ''; pointer-events: none; position: absolute;
+    inset: 0px; border-radius: inherit; z-index: -1;
+  }
+  .toggle-elevate.toggle-elevated::before { background-color: var(--elevate-2); }
+  .border.toggle-elevate::before { inset: -1px; }
+
+  .hover-elevate:not(.no-default-hover-elevate),
+  .active-elevate:not(.no-default-active-elevate),
+  .hover-elevate-2:not(.no-default-hover-elevate),
+  .active-elevate-2:not(.no-default-active-elevate) {
+    position: relative; z-index: 0;
+  }
+  .hover-elevate:not(.no-default-hover-elevate)::after,
+  .active-elevate:not(.no-default-active-elevate)::after,
+  .hover-elevate-2:not(.no-default-hover-elevate)::after,
+  .active-elevate-2:not(.no-default-active-elevate)::after {
+    content: ''; pointer-events: none; position: absolute;
+    inset: 0px; border-radius: inherit; z-index: 999;
+  }
+  .hover-elevate:hover:not(.no-default-hover-elevate)::after,
+  .active-elevate:active:not(.no-default-active-elevate)::after { background-color: var(--elevate-1); }
+  .hover-elevate-2:hover:not(.no-default-hover-elevate)::after,
+  .active-elevate-2:active:not(.no-default-active-elevate)::after { background-color: var(--elevate-2); }
+  .border.hover-elevate:not(.no-hover-interaction-elevate)::after,
+  .border.active-elevate:not(.no-active-interaction-elevate)::after,
+  .border.hover-elevate-2:not(.no-hover-interaction-elevate)::after,
+  .border.active-elevate-2:not(.no-active-interaction-elevate)::after { inset: -1px; }
+}

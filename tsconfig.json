@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noFallthroughCasesInSwitch": true,
+    "types": ["node", "vite/client"],
+    "paths": {
+      "@/*": ["./src/*"],
+      "@/models/*": ["./src/models/*"],
+      "@/controllers/*": ["./src/controllers/*"],
+      "@/views/*": ["./src/views/*"],
+      "@/utils/*": ["./src/utils/*"],
+      "@/components/*": ["./src/views/components/*"],
+      "@/data/*": ["./src/models/data/*"],
+      "@/context/*": ["./src/models/context/*"],
+      "@/hooks/*": ["./src/controllers/hooks/*"],
+      "@/lib/*": ["./src/utils/*"],
+      "@/pages/*": ["./src/views/pages/*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
