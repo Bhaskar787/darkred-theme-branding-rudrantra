@@ -18,7 +18,7 @@ export function Footer() {
           <div className="flex flex-col gap-4">
             <Link href="/" className="flex items-center shrink-0 group w-fit">
               <img
-                src="/images/rudrantralogofinal.png"
+                src="/images/f123.png"
                 alt="Rudrantra Ventures Pvt. Ltd."
                 className="h-15 sm:h-16 md:h-18 w-auto max-h-[100px] md:max-h-[112px] object-contain select-none transition-transform duration-300 group-hover:scale-105"
                 draggable={false}
