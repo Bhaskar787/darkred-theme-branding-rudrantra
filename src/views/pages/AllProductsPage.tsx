@@ -686,6 +686,46 @@ export default function AllProductsPage() {
       <Footer />
 
       {/* Global Overlays */}
+      {/* Mobile Filter Slide-over Drawer Modal - Slide in from Left */}
+      {isMobileFilterOpen && (
+        <div className="fixed inset-0 z-[150] flex justify-start md:hidden">
+          {/* Backdrop Overlay */}
+          <div
+            className="fixed inset-0 bg-black/50 transition-opacity animate-in fade-in duration-200"
+            onClick={() => setIsMobileFilterOpen(false)}
+          />
+
+          {/* Drawer Sheet */}
+          <div className="relative w-full max-w-xs sm:max-w-sm bg-[#ffffff] h-full shadow-2xl p-6 overflow-y-auto flex flex-col justify-between z-10 animate-in slide-in-from-left duration-300 text-[#650a06]">
+            <div>
+              <div className="flex items-center justify-between pb-4 border-b border-[#650a06]/20 mb-6">
+                <h2 className="font-display font-bold text-xl text-[#650a06]">Product Filters</h2>
+                <button
+                  onClick={() => setIsMobileFilterOpen(false)}
+                  className="p-1.5 rounded-full text-[#650a06]/70 hover:text-[#650a06] hover:bg-[#faf7f2] transition-colors cursor-pointer"
+                  aria-label="Close filters"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Render Filter Sidebar Content */}
+              <FilterSidebarContent />
+            </div>
+
+            {/* Apply Filters Mobile Button */}
+            <div className="pt-6 border-t border-[#650a06]/20 mt-6">
+              <button
+                onClick={() => setIsMobileFilterOpen(false)}
+                className="w-full py-3.5 bg-[#650a06] hover:bg-[#8a130c] text-[#faf7f2] font-heading font-bold text-xs uppercase tracking-widest rounded-xl shadow-md transition-all cursor-pointer"
+              >
+                Apply Filters ({sortedProducts.length} Products)
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <MenuDrawer />
       <SearchOverlay />
       <CartDrawer />
