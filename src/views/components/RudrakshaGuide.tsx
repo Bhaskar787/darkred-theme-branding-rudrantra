@@ -25,30 +25,37 @@ export function RudrakshaGuide() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-        <div className="text-center mb-10 sm:mb-14 md:mb-20 max-w-3xl mx-auto">
-          <span className="text-[9px] sm:text-[10px] md:text-xs font-heading font-bold uppercase tracking-widest text-[#650a06] bg-[#650a06]/10 border border-[#650a06]/30 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full inline-block mb-4 sm:mb-6 shadow-sm">
-            Sacred Knowledge
-          </span>
-          <h3 className="font-display text-2xl sm:text-3xl md:text-4xl text-[#650a06] font-bold tracking-tight leading-tight mb-3 sm:mb-5">
-            The Language of Mukhi
-          </h3>
-          <p className="text-[#650a06]/85 font-body text-sm sm:text-base md:text-lg leading-relaxed mt-4 sm:mt-6 px-2 font-medium">
-            Explore the metaphysical signatures, ruling cosmic forces, and energetic applications behind each divine configuration as described in the Shiva Purana.
-          </p>
+        {/* Header Layout: Tag & Title on Left, Description & Button on Right */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 sm:gap-8 mb-10 sm:mb-14 md:mb-16">
+          {/* Left Column: Pill Tag & Big Title */}
+          <div className="max-w-xl">
+            <span className="text-[9px] sm:text-[10px] md:text-xs font-heading font-bold uppercase tracking-widest text-[#650a06] bg-[#650a06]/10 border border-[#650a06]/30 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full inline-block mb-3 sm:mb-4 shadow-2xs">
+              Sacred Knowledge
+            </span>
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-[#650a06] font-bold tracking-tight leading-[1.1]">
+              The Language of Mukhi
+            </h2>
+          </div>
+
+          {/* Right Column: Description with Vertical Divider + Action Button */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 lg:gap-6 shrink-0 lg:max-w-xl">
+            <div className="border-l-2 border-[#650a06]/30 pl-4 py-1 text-xs sm:text-sm font-medium text-[#650a06]/85 leading-relaxed max-w-md">
+              Explore the metaphysical signatures, ruling cosmic forces, and energetic applications behind each divine configuration as described in the Shiva Purana.
+            </div>
+
+            <Link
+              href="/mukhi-guide"
+              className="inline-flex items-center gap-2 px-5 py-3 bg-[#650a06] hover:bg-[#8a130c] text-[#f7e5d9] transition-all rounded-full font-heading font-bold text-xs uppercase tracking-wider shrink-0 shadow-md group cursor-pointer hover:shadow-lg hover:scale-105 transform duration-200"
+            >
+              <span>View All Mukhi</span>
+              <ArrowRight className="w-4 h-4 text-[#f7e5d9] group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
         </div>
 
         <MukhiCardGrid items={previewMukhis} />
 
-        {/* View All CTA */}
-        <div className="flex justify-center mt-10 sm:mt-12 md:mt-16">
-          <Link
-            href="/mukhi-guide"
-            className="group inline-flex items-center gap-2 sm:gap-3 font-heading font-bold uppercase tracking-widest text-xs sm:text-sm text-[#f7e5d9] bg-[#650a06] px-6 sm:px-8 py-3 sm:py-4 rounded-full shadow-md hover:bg-[#8a130c] transition-all duration-300 hover:-translate-y-0.5 w-full sm:w-auto justify-center"
-          >
-            View All Mukhi
-            <ArrowRight className="w-4 h-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1 text-[#f7e5d9]" />
-          </Link>
-        </div>
+   
 
       </div>
     </section>

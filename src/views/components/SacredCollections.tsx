@@ -137,10 +137,10 @@ export function SacredCollections() {
               Hand-picked, lab-certified authentic Nepali Rudraksha items, energized for divine harmony.
             </p>
             <Link
-              href="/all-products"
+              href="/collections"
               className="hidden sm:inline-flex items-center gap-2 px-4 py-2 bg-[#650a06] text-[#f7e5d9] hover:bg-[#8a130c] transition-all rounded-xl font-heading font-bold text-xs uppercase tracking-wider shrink-0 shadow-md"
             >
-              <span>All Products</span>
+              <span>All Collections</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

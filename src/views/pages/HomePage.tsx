@@ -44,7 +44,7 @@ export default function HomePage() {
        
          <FeaturedCollectionSpotlight />
         <NewLaunchesBanner />
-           <CategoryShowcase />
+        <CategoryShowcase />
 
         
         <ChooseByIntention />
