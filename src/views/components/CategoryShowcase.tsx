@@ -81,7 +81,7 @@ const categoriesList: (CategoryItem & { slug: string })[] = [
 
 export function CategoryShowcase() {
   return (
-    <section className="py-14 sm:py-20 lg:py-24 bg-[#f4ebd0] relative overflow-hidden border-b border-[#650a06]/20">
+    <section className="py-14 sm:py-20 lg:py-24 bg-[#faf7f2] relative overflow-hidden border-b border-[#650a06]/20">
       {/* OM Section Divider */}
       <div className="flex items-center justify-center gap-3 sm:gap-4 px-4 pt-0 pb-6 sm:pb-8 relative z-10">
         <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#650a06]/40 to-transparent max-w-xs" />

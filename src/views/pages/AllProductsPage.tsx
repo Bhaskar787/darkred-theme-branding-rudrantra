@@ -217,7 +217,7 @@ export default function AllProductsPage() {
 
   // Filter Sidebar Content Component
   const FilterSidebarContent = () => (
-    <div className="space-y-6 text-[#650a06]">
+    <div className="space-y-6 text-[#650a06] pt-1 sm:pt-2">
       <div className="flex items-center justify-between pb-3 border-b border-[#650a06]/20">
         <h2 className="font-heading font-bold text-xl text-[#650a06] tracking-tight">Filters</h2>
         {hasActiveFilters && (
@@ -437,19 +437,19 @@ export default function AllProductsPage() {
       <AnnouncementBar />
       <Navbar />
 
-      {/* Responsive Search & Sort Controls Header - FIXED STICKY POSITION UNDER NAVBAR */}
-      <div className="bg-[#ffffff] border-b border-[#650a06]/20 sticky top-[64px] sm:top-[80px] lg:top-[96px] z-40 shadow-md py-3 px-3 sm:px-6 md:px-8 transition-all duration-300">
+      {/* Responsive Search & Sort Controls Header - ZERO GAP FLUSH UNDER MOBILE & DESKTOP NAVBAR */}
+      <div className="bg-[#ffffff] border-b border-[#650a06]/20 sticky top-[48px] xs:top-[50px] sm:top-[54px] lg:top-[64px] z-40 shadow-md py-4 sm:py-5 lg:py-6 px-3.5 sm:px-6 md:px-10 transition-all duration-300">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 sm:gap-4">
           
           {/* Search Box Component */}
           <div className="relative w-full md:max-w-md lg:max-w-lg mx-auto md:mx-0">
-            <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#650a06]/50" />
+            <Search className="w-4.5 h-4.5 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#650a06]/50" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search products by name, Mukhi, category..."
-              className="w-full pl-10 pr-9 py-2.5 bg-[#faf7f2] border border-[#650a06]/20 rounded-xl text-xs sm:text-sm font-body text-[#650a06] placeholder:text-[#650a06]/50 focus:outline-none focus:border-[#650a06] transition-all shadow-xs"
+              className="w-full pl-10 pr-9 py-3 sm:py-3.5 bg-[#faf7f2] border border-[#650a06]/25 rounded-xl text-xs sm:text-sm font-body text-[#650a06] placeholder:text-[#650a06]/50 focus:outline-none focus:border-[#650a06] transition-all shadow-xs font-medium"
             />
             {searchQuery && (
               <button
@@ -466,7 +466,7 @@ export default function AllProductsPage() {
             {/* Filter Toggle Button (Mobile Only) */}
             <button
               onClick={() => setIsMobileFilterOpen(true)}
-              className="md:hidden flex items-center justify-center gap-1.5 px-3.5 py-2.5 bg-[#650a06] hover:bg-[#8a130c] text-[#faf7f2] rounded-xl text-xs font-heading font-bold uppercase tracking-wider transition-colors shadow-xs flex-1 sm:flex-none cursor-pointer"
+              className="md:hidden flex items-center justify-center gap-1.5 px-4 py-3 bg-[#650a06] hover:bg-[#8a130c] text-[#faf7f2] rounded-xl text-xs font-heading font-bold uppercase tracking-wider transition-colors shadow-xs flex-1 sm:flex-none cursor-pointer"
             >
               <SlidersHorizontal className="w-4 h-4 text-[#faf7f2]" />
               <span>Filters</span>
@@ -484,7 +484,7 @@ export default function AllProductsPage() {
                 <select
                   value={sortOption}
                   onChange={(e) => setSortOption(e.target.value as SortOption)}
-                  className="w-full sm:w-auto appearance-none bg-[#ffffff] border border-[#650a06]/30 text-[#650a06] font-heading font-bold text-xs uppercase tracking-wider px-3.5 py-2.5 pr-8 rounded-xl focus:outline-none focus:border-[#650a06] cursor-pointer shadow-xs truncate"
+                  className="w-full sm:w-auto appearance-none bg-[#ffffff] border border-[#650a06]/30 text-[#650a06] font-heading font-bold text-xs uppercase tracking-wider px-3.5 py-3 sm:py-2.5 pr-8 rounded-xl focus:outline-none focus:border-[#650a06] cursor-pointer shadow-xs truncate"
                 >
                   {sortOptionsList.map((opt) => (
                     <option key={opt.value} value={opt.value}>
@@ -512,8 +512,8 @@ export default function AllProductsPage() {
 
       {/* Page Body Grid */}
       <div className="flex-1 flex flex-col md:flex-row w-full min-h-[calc(100vh-140px)]">
-        {/* Desktop Left Sidebar */}
-        <aside className="hidden md:block w-72 lg:w-80 shrink-0 bg-[#ffffff] border-r border-[#650a06]/20 p-5 lg:p-6 sticky top-[128px] sm:top-[144px] lg:top-[160px] max-h-[calc(100vh-160px)] overflow-y-auto shadow-xs">
+        {/* Desktop Left Sidebar - STICKY BELOW SEARCH BAR */}
+        <aside className="hidden md:block w-72 lg:w-80 shrink-0 bg-[#ffffff] border-r border-[#650a06]/20 p-5 lg:p-6 sticky top-[140px] sm:top-[150px] lg:top-[162px] max-h-[calc(100vh-175px)] overflow-y-auto shadow-xs">
           <FilterSidebarContent />
         </aside>
 

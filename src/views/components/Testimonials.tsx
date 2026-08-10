@@ -203,7 +203,7 @@ export function Testimonials() {
   }, [api, isHovering, isPaused]);
 
   return (
-    <section className="py-14 sm:py-20 md:py-24 bg-[#faf7f2] relative overflow-hidden border-t border-[#650a06]/20">
+    <section className="py-14 sm:py-20 md:py-24 bg-[#f4ebd0] relative overflow-hidden border-t border-[#650a06]/20">
       {/* Lotus/Prayer overlay */}
       <div
         className="absolute inset-0 opacity-[0.08] mix-blend-multiply bg-cover bg-center"

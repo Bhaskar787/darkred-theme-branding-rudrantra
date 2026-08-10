@@ -35,15 +35,21 @@ export default function HomePage() {
       <main className="flex-1">
         <HeroSlider />
         <TrustStrip />
+
+<SacredCollections />
+         <BestSellers />
+         
        
-        <SacredCollections />
-        <WhyChoose />
+        
+       
          <FeaturedCollectionSpotlight />
         <NewLaunchesBanner />
+           <CategoryShowcase />
 
-        <BestSellers />
+        
         <ChooseByIntention />
-        <CategoryShowcase />
+        <WhyChoose />
+     
         <PromoBanners />
         <RudrakshaGuide />
         <SpiritualCalendar />

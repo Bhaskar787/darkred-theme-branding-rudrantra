@@ -26,7 +26,7 @@ const reasons = [
 
 export function WhyChoose() {
   return (
-    <section className="py-14 sm:py-20 lg:py-24 bg-[#faf7f2] relative overflow-hidden border-b border-[#650a06]/20">
+    <section className="py-14 sm:py-20 lg:py-24 bg-[#f4ebd0] relative overflow-hidden border-b border-[#650a06]/20">
       {/* Background Meditation Image Intact (0.35 Opacity) */}
       <div 
         className="absolute inset-0 opacity-[0.25] bg-cover bg-center"

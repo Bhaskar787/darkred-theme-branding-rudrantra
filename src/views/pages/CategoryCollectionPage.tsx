@@ -147,7 +147,7 @@ export default function CategoryCollectionPage() {
       <Navbar />
 
       {/* ── 1. STICKY HANGING BREADCRUMBS & CATEGORY SWITCHER BAR ── */}
-      <div className="bg-[#ffffff] border-b border-[#650a06]/20 sticky top-[64px] sm:top-[80px] lg:top-[96px] z-40 shadow-md py-2.5 px-4 sm:px-6 transition-all duration-300">
+      <div className="bg-[#ffffff] border-b border-[#650a06]/20 sticky top-[50px] sm:top-[58px] lg:top-[60px] z-40 shadow-md py-2.5 px-4 sm:px-6 transition-all duration-300">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-2.5">
           {/* Breadcrumbs */}
           <div className="flex items-center gap-2 text-xs text-[#650a06]/80 font-medium shrink-0">
