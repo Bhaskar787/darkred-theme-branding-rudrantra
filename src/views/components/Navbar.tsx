@@ -840,7 +840,7 @@ export function Navbar() {
     if (!isSearchFocused) return null;
 
     return (
-      <div className="absolute top-full left-0 right-0 mt-2 bg-[#fdfbf7] border border-[#650a06]/30 rounded-2xl shadow-[0_20px_50px_rgba(101,10,6,0.22)] overflow-hidden z-[250] backdrop-blur-xl animate-in fade-in zoom-in-95 duration-200 text-[#3b120c]">
+      <div className="absolute top-full left-0 right-0 mt-2 bg-[#fdfbf7] border border-[#650a06]/30 rounded-2xl shadow-[0_25px_60px_rgba(101,10,6,0.3)] overflow-hidden z-[500] backdrop-blur-xl animate-in fade-in zoom-in-95 duration-200 text-[#3b120c]">
         
         {/* CASE 1: Query is empty — Popular Searches & Quick Categories */}
         {!searchQuery.trim() && (
@@ -1027,7 +1027,7 @@ export function Navbar() {
         
         {/* MAIN NAVBAR CONTAINER */}
         <div
-          className={`w-full transition-all duration-300 border-b ${
+          className={`w-full transition-all duration-300 border-b relative z-50 ${
             scrolled
               ? 'bg-[#f2eae7]/95 backdrop-blur-md shadow-[0_4px_25px_rgba(101,10,6,0.12)] border-[#650a06]/20 py-2'
               : 'bg-[#f2eae7] border-[#650a06]/15 py-2.5 sm:py-3'
@@ -1056,7 +1056,7 @@ export function Navbar() {
             </div>
 
             {/* CENTER: DESKTOP SEARCH INPUT BOX WITH LIVE DEBOUNCED SEARCH */}
-            <div ref={searchContainerRef} className="hidden lg:flex flex-1 max-w-sm xl:max-w-md mx-4 relative">
+            <div ref={searchContainerRef} className="hidden lg:flex flex-1 max-w-sm xl:max-w-md mx-4 relative z-[300]">
               <input
                 type="text"
                 value={searchQuery}
