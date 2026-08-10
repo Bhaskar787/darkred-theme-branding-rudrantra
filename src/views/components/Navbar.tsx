@@ -710,6 +710,7 @@ export function Navbar() {
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
   const searchContainerRef = useRef<HTMLDivElement>(null);
   const mobileSearchContainerRef = useRef<HTMLDivElement>(null);
+  const mobileSearchBtnRef = useRef<HTMLButtonElement>(null);
 
   // Debounce logic (300ms delay)
   useEffect(() => {
@@ -730,6 +731,9 @@ export function Navbar() {
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent | TouchEvent) => {
       const target = e.target as Node;
+      if (mobileSearchBtnRef.current && mobileSearchBtnRef.current.contains(target)) {
+        return;
+      }
       const isOutsideDesktop = searchContainerRef.current ? !searchContainerRef.current.contains(target) : true;
       const isOutsideMobile = mobileSearchContainerRef.current ? !mobileSearchContainerRef.current.contains(target) : true;
 
@@ -770,8 +774,6 @@ export function Navbar() {
             setShowSecondaryNav(true);
           } else if (currentY - lastY > 10) {
             setShowSecondaryNav(false);
-            setIsMobileSearchOpen(false);
-            setIsSearchFocused(false);
           } else if (lastY - currentY > 10) {
             setShowSecondaryNav(true);
           }
@@ -847,7 +849,7 @@ export function Navbar() {
           <div className="p-4 space-y-4">
             <div>
               <span className="text-[10px] font-heading font-bold uppercase tracking-[0.2em] text-[#650a06]/80 block mb-2">
-                🔥 Popular &amp; Trending Searches
+                 Popular &amp; Trending Searches
               </span>
               <div className="flex flex-wrap gap-1.5">
                 {popularSearches.map((term) => (
@@ -1111,8 +1113,10 @@ export function Navbar() {
 
               {/* Mobile Search Icon Button */}
               <button
-                onClick={() => {
-                  setIsMobileSearchOpen(!isMobileSearchOpen);
+                ref={mobileSearchBtnRef}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsMobileSearchOpen((prev) => !prev);
                   setIsSearchFocused(true);
                 }}
                 className="lg:hidden p-1 sm:p-2 text-[#650a06] hover:text-[#8a130c] hover:bg-[#650a06]/10 transition-colors rounded-full shrink-0"
@@ -1222,9 +1226,9 @@ export function Navbar() {
               : 'max-h-0 opacity-0 -translate-y-2 py-0 border-b-0 pointer-events-none overflow-hidden'
           }`}
         >
-          <div className="max-w-[1440px] mx-auto px-8 flex items-center justify-center gap-3 lg:gap-4 xl:gap-8 py-2">
+          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center gap-3 lg:gap-4 xl:gap-8 py-2">
             
-            {/* 1. RUDRAKSHA BEADS — MUKHI GRID MEGA DROPDOWN */}
+            {/* 1. RUDRAKSHA BEADS — MEGA DROPDOWN ANCHORED UNDER RUDRAKSHA BEADS LINK */}
             <div className="relative group cursor-pointer py-1 shrink-0">
               <button className="text-[11px] lg:text-xs xl:text-[13px] font-heading font-semibold text-[#650a06] group-hover:text-[#8a130c] transition-colors flex items-center gap-1 whitespace-nowrap">
                 <GiFlowerEmblem className="w-4 h-4 text-[#8a130c]" />
@@ -1232,92 +1236,226 @@ export function Navbar() {
                 <ChevronDown className="w-3.5 h-3.5 transition-transform duration-300 group-hover:rotate-180 text-[#650a06]" />
               </button>
 
-              <div className="absolute top-full left-0 pt-2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300 translate-y-2 group-hover:translate-y-0 z-[200]">
-                <div className="bg-[#fdfbf7] border border-[#650a06]/25 shadow-[0_20px_50px_rgba(101,10,6,0.18)] rounded-2xl p-6 w-[500px] relative overflow-hidden backdrop-blur-xl">
-                  
-                  {/* Header */}
-                  <div className="relative z-10 mb-4 pb-3 border-b border-[#650a06]/10">
-                    <span className="text-[10px] font-heading font-bold uppercase tracking-[0.2em] text-[#650a06]/70">
-                      Shop Collection
-                    </span>
-                    <h3 className="font-display text-xl text-[#650a06] font-bold mt-0.5">
-                      Rudraksha Beads
-                    </h3>
-                    <p className="text-[11px] font-body text-[#3b120c]/75 mt-0.5">
-                      Choose by mukhi count — lab-tested beads sourced directly with care.
-                    </p>
-                  </div>
-
-                  {/* Mukhi Grid */}
-                  <div className="relative z-10 grid grid-cols-4 gap-2.5">
-                    {mukhiList.map((mukhi) => (
-                      <Link
-                        key={mukhi}
-                        href={`/all-products?category=Rudraksha&mukhi=${mukhi}`}
-                        className="flex flex-col items-center gap-1 p-2.5 rounded-xl border border-[#650a06]/15 hover:border-[#650a06]/50 bg-[#f9f4ec]/50 hover:bg-[#650a06]/10 transition-all group/mukhi text-center"
-                      >
-                        <div className="w-8 h-8 rounded-full bg-[#650a06]/10 border border-[#650a06]/30 text-[#650a06] flex items-center justify-center text-xs font-heading font-bold group-hover/mukhi:bg-[#650a06] group-hover/mukhi:text-[#f7e5d9] group-hover/mukhi:scale-105 transition-all">
-                          {mukhi}
-                        </div>
-                        <span className="text-[11px] font-heading font-semibold text-[#650a06] group-hover/mukhi:text-[#8a130c] leading-tight">
-                          {mukhi} Mukhi
+              {/* MEGA DROPDOWN PANEL - CONTINUOUS HOVER BRIDGE TOUCHING TOP-FULL */}
+              <div className="absolute left-0 top-full pt-4 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300 ease-out transform -translate-y-3 group-hover:translate-y-0 z-[250] origin-top-left w-[840px] max-w-[90vw]">
+                <div className="bg-[#fdfbf7] border border-[#650a06]/25 shadow-[0_25px_60px_rgba(101,10,6,0.25)] rounded-2xl p-6 relative overflow-hidden backdrop-blur-2xl">
+                  <div className="grid grid-cols-12 gap-6 items-start">
+                    
+                    {/* LEFT COLUMN: Subcategories List */}
+                    <div className="col-span-4 border-r border-[#650a06]/15 pr-6 space-y-3">
+                      <div className="pb-2 border-b border-[#650a06]/10">
+                        <span className="text-[10px] font-heading font-bold uppercase tracking-[0.2em] text-[#650a06]/70">
+                          Shop Collection
                         </span>
-                        <span className="text-[8px] font-body uppercase tracking-wider text-[#650a06]/60">
-                          Rudraksha
-                        </span>
-                      </Link>
-                    ))}
-                  </div>
+                        <h3 className="font-display text-lg text-[#650a06] font-bold mt-0.5">
+                          Rudraksha &amp; Mukhi Beads
+                        </h3>
+                      </div>
 
-                  {/* View All Button */}
-                  <Link
-                    href="/all-products?category=Rudraksha"
-                    className="relative z-10 mt-5 w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-[#650a06] text-[#f7e5d9] font-heading font-bold text-xs uppercase tracking-wider hover:bg-[#8a130c] transition-colors shadow-md"
-                  >
-                    <span>View All Rudraksha Beads</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
+                      <div className="space-y-1">
+                        {[
+                          { name: 'Nepal Origin Rudraksha Beads', href: '/all-products?category=Rudraksha' },
+                          { name: '1 to 21 Mukhi Special Beads', href: '/all-products?category=Rudraksha&mukhi=1' },
+                          { name: 'Siddha Mala & Combination', href: '/all-products?category=Rudraksha&subcategory=Siddha%20Mala' },
+                          { name: 'Rudraksha Japa Mala (108 Beads)', href: '/all-products?category=Rudraksha&subcategory=Rudraksha%20Mala' },
+                          { name: 'Silver Capped Bracelets & Kawach', href: '/all-products?category=Rudraksha&subcategory=Rudraksha%20Bracelet' },
+                          { name: 'Consecrated Collector Items', href: '/all-products?category=Rudraksha&collector=true' },
+                        ].map((item, idx) => (
+                          <Link
+                            key={idx}
+                            href={item.href}
+                            className="flex items-center justify-between p-2 rounded-xl text-xs font-heading font-bold text-[#650a06] hover:bg-[#650a06]/10 hover:text-[#8a130c] transition-colors group/item"
+                          >
+                            <span className="uppercase tracking-wider">{item.name}</span>
+                            <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover/item:opacity-100 transition-opacity" />
+                          </Link>
+                        ))}
+                      </div>
+
+                      <div className="pt-2">
+                        <Link
+                          href="/all-products?category=Rudraksha"
+                          className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-[#650a06] text-[#f7e5d9] font-heading font-bold text-xs uppercase tracking-wider hover:bg-[#8a130c] transition-colors shadow-sm"
+                        >
+                          <span>View All Rudraksha Beads →</span>
+                        </Link>
+                      </div>
+                    </div>
+
+                    {/* RIGHT COLUMN: Featured Products with Images */}
+                    <div className="col-span-8 space-y-3">
+                      <div className="flex items-center justify-between pb-2 border-b border-[#650a06]/10">
+                        <span className="text-[10px] font-heading font-bold uppercase tracking-[0.2em] text-[#650a06]/70">
+                          Featured Rudraksha Beads &amp; Malas
+                        </span>
+                        <span className="text-[11px] font-body text-[#650a06]/70 font-semibold">100% Pashupatinath Consecrated</span>
+                      </div>
+
+                      <div className="grid grid-cols-3 gap-4">
+                        {[
+                          {
+                            id: 'rud-b-2',
+                            name: '2 Mukhi Rudraksha Bead (Nepal)',
+                            price: 62126,
+                            image: 'https://images.pexels.com/photos/13013622/pexels-photo-13013622.jpeg?auto=compress&cs=tinysrgb&w=600',
+                            badge: 'FEATURED',
+                          },
+                          {
+                            id: 'rud-b-3',
+                            name: '3 Mukhi Agni Rudraksha Bead',
+                            price: 1586,
+                            image: 'https://images.pexels.com/photos/18723427/pexels-photo-18723427.jpeg?auto=compress&cs=tinysrgb&w=600',
+                            badge: 'BESTSELLER',
+                          },
+                          {
+                            id: 'rud-b-7',
+                            name: '7 Mukhi Mahalaxmi Rudraksha Bead',
+                            price: 2850,
+                            image: 'https://images.pexels.com/photos/31430346/pexels-photo-31430346.jpeg?auto=compress&cs=tinysrgb&w=600',
+                            badge: 'WEALTH BEAD',
+                          },
+                        ].map((prod) => (
+                          <Link
+                            key={prod.id}
+                            href={`/product/${prod.id}`}
+                            className="bg-[#ffffff] border border-[#650a06]/20 rounded-xl overflow-hidden shadow-2xs hover:shadow-md hover:border-[#650a06]/50 transition-all group/card flex flex-col"
+                          >
+                            <div className="h-32 w-full overflow-hidden relative bg-[#faf7f2]">
+                              <img
+                                src={prod.image}
+                                alt={prod.name}
+                                className="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-300"
+                              />
+                              <span className="absolute top-2 left-2 px-2 py-0.5 bg-[#650a06] text-[#f7e5d9] text-[9px] font-heading font-bold uppercase tracking-wider rounded-md shadow-xs">
+                                {prod.badge}
+                              </span>
+                            </div>
+                            <div className="p-3 flex-1 flex flex-col justify-between space-y-1.5">
+                              <h4 className="text-xs font-heading font-bold text-[#650a06] group-hover/card:text-[#8a130c] transition-colors line-clamp-2 leading-snug">
+                                {prod.name}
+                              </h4>
+                              <span className="font-heading font-bold text-xs text-[#650a06] block">
+                                {formatPrice(prod.price)}
+                              </span>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* 2. SACRED CATEGORIES TOOLTIP MEGA DROPDOWN */}
+            {/* 2. SACRED CATEGORIES — MEGA DROPDOWN ANCHORED UNDER SACRED CATEGORIES LINK */}
             <div className="relative group cursor-pointer py-1 shrink-0">
               <button className="text-[11px] lg:text-xs xl:text-[13px] font-heading font-semibold text-[#650a06] group-hover:text-[#8a130c] transition-colors flex items-center gap-1 whitespace-nowrap">
                 <span>Sacred Categories</span>
                 <ChevronDown className="w-3.5 h-3.5 transition-transform duration-300 group-hover:rotate-180 text-[#650a06]" />
               </button>
 
-              <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300 translate-y-2 group-hover:translate-y-0 z-[200]">
-                <div className="bg-[#fdfbf7] border border-[#650a06]/25 shadow-[0_20px_50px_rgba(101,10,6,0.18)] rounded-2xl p-5 w-[540px] grid grid-cols-2 gap-3 relative overflow-hidden backdrop-blur-xl">
-                  {categories.map((cat, idx) => (
-                    <Link
-                      key={idx}
-                      href={cat.href}
-                      className="flex items-start gap-3 p-3 rounded-xl hover:bg-[#650a06]/10 transition-colors border border-transparent hover:border-[#650a06]/25 group/item"
-                    >
-                      <div className="w-9 h-9 rounded-lg bg-[#650a06]/10 border border-[#650a06]/20 text-[#650a06] flex items-center justify-center shrink-0 group-hover/item:bg-[#650a06] group-hover/item:text-[#f7e5d9] transition-all">
-                        <cat.icon className="w-5 h-5" />
+              {/* MEGA DROPDOWN PANEL - CONTINUOUS HOVER BRIDGE TOUCHING TOP-FULL */}
+              <div className="absolute left-0 lg:-left-28 xl:-left-16 top-full pt-4 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300 ease-out transform -translate-y-3 group-hover:translate-y-0 z-[250] origin-top-left w-[840px] max-w-[90vw]">
+                <div className="bg-[#fdfbf7] border border-[#650a06]/25 shadow-[0_25px_60px_rgba(101,10,6,0.25)] rounded-2xl p-6 relative overflow-hidden backdrop-blur-2xl">
+                  <div className="grid grid-cols-12 gap-6 items-start">
+                    
+                    {/* LEFT COLUMN: Subcategories List */}
+                    <div className="col-span-4 border-r border-[#650a06]/15 pr-6 space-y-2">
+                      <div className="pb-2 border-b border-[#650a06]/10">
+                        <span className="text-[10px] font-heading font-bold uppercase tracking-[0.2em] text-[#650a06]/70">
+                          Divine Catalog
+                        </span>
+                        <h3 className="font-display text-lg text-[#650a06] font-bold mt-0.5">
+                          Sacred Categories
+                        </h3>
                       </div>
-                      <div>
-                        <h4 className="text-xs font-heading font-bold text-[#650a06]">
-                          {cat.title}
-                        </h4>
-                        <p className="text-[10px] font-body text-[#3b120c]/70 line-clamp-1 mt-0.5">
-                          {cat.sub}
-                        </p>
-                      </div>
-                    </Link>
-                  ))}
 
-                  {/* Footer inside Dropdown */}
-                  <div className="col-span-2 pt-3 border-t border-[#650a06]/15 flex justify-between items-center text-xs">
-                    <span className="font-body text-[#650a06]/80 flex items-center gap-1 text-[11px]">
-                      <ShieldCheck className="w-3.5 h-3.5 text-[#650a06]" /> 100% Pashupatinath Consecrated
-                    </span>
-                    <Link href="/collections" className="font-heading font-bold text-[#650a06] hover:text-[#8a130c] flex items-center gap-1">
-                      Explore All Collections <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
+                      <div className="space-y-1">
+                        {[
+                          { name: 'Stone Pendants & Kawach', href: '/all-products?category=Gemstone' },
+                          { name: 'Quartz & Sphatik Shivling', href: '/all-products?category=Statue%20%26%20Sphatik' },
+                          { name: 'Sacred Yantras & Idols', href: '/all-products?category=Statue%20%26%20Sphatik' },
+                          { name: 'Statues & Figurines', href: '/all-products?category=Statue%20%26%20Sphatik' },
+                          { name: 'Gandaki Saligram | Shankha | Ghanti', href: '/all-products?category=Saligram' },
+                          { name: 'Vastu & Fengshui Sacred Store', href: '/all-products?category=Pooja%20Samagri' },
+                          { name: '7 Chakra Reiki Healing Bowls', href: '/all-products?category=Singing%20Bowl' },
+                        ].map((item, idx) => (
+                          <Link
+                            key={idx}
+                            href={item.href}
+                            className="flex items-center justify-between p-2 rounded-xl text-xs font-heading font-bold text-[#650a06] hover:bg-[#650a06]/10 hover:text-[#8a130c] transition-colors group/item"
+                          >
+                            <span className="uppercase tracking-wider truncate">{item.name}</span>
+                            <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover/item:opacity-100 transition-opacity shrink-0 ml-1" />
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* RIGHT COLUMN: Featured Category Product Cards with Real Images */}
+                    <div className="col-span-8 space-y-3">
+                      <div className="flex items-center justify-between pb-2 border-b border-[#650a06]/10">
+                        <span className="text-[10px] font-heading font-bold uppercase tracking-[0.2em] text-[#650a06]/70">
+                          ✨ Popular Shila, Gemstones &amp; Shrines
+                        </span>
+                        <Link href="/collections" className="text-xs font-heading font-bold text-[#650a06] hover:text-[#8a130c] flex items-center gap-1">
+                          Explore All <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                      </div>
+
+                      <div className="grid grid-cols-3 gap-4">
+                        {[
+                          {
+                            id: 'sal-1',
+                            name: 'Authentic Gandaki Shaligram Shila',
+                            price: 12500,
+                            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG7r-xBROYk0kcVnBqjSal_5jbGHZUO8ATM2uAG_HNzgGCsnNjh4wNMoEl&s=10',
+                            badge: 'SACRED SHILA',
+                          },
+                          {
+                            id: 'rud-m-1',
+                            name: '108 Bead 5 Mukhi Nepal Japa Mala',
+                            price: 4990,
+                            image: 'https://images.pexels.com/photos/2297252/pexels-photo-2297252.jpeg?auto=compress&cs=tinysrgb&w=600',
+                            badge: 'BESTSELLER',
+                          },
+                          {
+                            id: 'rud-b-14',
+                            name: '14 Mukhi Hanuman Rudraksha Bead',
+                            price: 38500,
+                            image: 'https://images.pexels.com/photos/34792315/pexels-photo-34792315.jpeg?auto=compress&cs=tinysrgb&w=600',
+                            badge: 'COLLECTOR',
+                          },
+                        ].map((prod) => (
+                          <Link
+                            key={prod.id}
+                            href={`/product/${prod.id}`}
+                            className="bg-[#ffffff] border border-[#650a06]/20 rounded-xl overflow-hidden shadow-2xs hover:shadow-md hover:border-[#650a06]/50 transition-all group/card flex flex-col"
+                          >
+                            <div className="h-32 w-full overflow-hidden relative bg-[#faf7f2]">
+                              <img
+                                src={prod.image}
+                                alt={prod.name}
+                                className="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-300"
+                              />
+                              <span className="absolute top-2 left-2 px-2 py-0.5 bg-[#650a06] text-[#f7e5d9] text-[9px] font-heading font-bold uppercase tracking-wider rounded-md shadow-xs">
+                                {prod.badge}
+                              </span>
+                            </div>
+                            <div className="p-3 flex-1 flex flex-col justify-between space-y-1.5">
+                              <h4 className="text-xs font-heading font-bold text-[#650a06] group-hover/card:text-[#8a130c] transition-colors line-clamp-2 leading-snug">
+                                {prod.name}
+                              </h4>
+                              <span className="font-heading font-bold text-xs text-[#650a06] block">
+                                {formatPrice(prod.price)}
+                              </span>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+
                   </div>
                 </div>
               </div>

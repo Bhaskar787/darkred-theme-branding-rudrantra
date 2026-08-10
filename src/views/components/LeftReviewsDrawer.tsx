@@ -194,7 +194,7 @@ export function LeftReviewsDrawer() {
       <AnimatePresence>
         {showTab && (
           <div
-            className="fixed top-16 sm:top-20 left-0 right-0 bottom-0 z-[110] pointer-events-none"
+            className="fixed top-[52px] sm:top-[64px] lg:top-[76px] left-0 right-0 bottom-0 z-[110] pointer-events-none"
             role="dialog"
             aria-modal={isOpen}
           >

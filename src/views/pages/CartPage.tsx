@@ -7,6 +7,7 @@ import { SearchOverlay } from '@/views/components/SearchOverlay';
 import { MenuDrawer } from '@/views/components/MenuDrawer';
 import { useCart } from '@/models/context/CartContext';
 import { formatPrice } from '@/utils/utils';
+import { IoBagCheckOutline } from "react-icons/io5";
 import {
   ShoppingBag,
   Trash2,
@@ -140,7 +141,7 @@ export function CartPage() {
                 <div className="bg-[#ffffff] rounded-2xl border border-[#650a06]/20 p-4 shadow-md space-y-2">
                   <div className="flex items-center justify-between text-xs font-bold text-[#650a06]">
                     <span className="flex items-center gap-1.5 text-[#650a06]">
-                      <Sparkles className="w-4 h-4 text-[#650a06]" />
+                      <IoBagCheckOutline className="w-4 h-4 text-[#650a06]" />
                       {amountNeeded > 0 ? (
                         <>Add <strong className="text-[#650a06] font-bold">{formatPrice(amountNeeded)}</strong> more to qualify for <strong>FREE Insured Express Shipping</strong></>
                       ) : (
